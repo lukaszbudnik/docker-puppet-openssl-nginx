@@ -1,6 +1,6 @@
 # puppet + nginx + openssl derived from lukasz/docker-scala
 #
-# Version     0.1
+# Version     0.2
 
 FROM lukasz/docker-scala
 MAINTAINER Łukasz Budnik lukasz.budnik@gmail.com
@@ -21,8 +21,4 @@ RUN FACTER_fqdn=dev FACTER_port=9000 FACTER_random=`< /dev/urandom tr -dc _A-Z-a
 # there is a bug in puppet openssl module need to invoke it twice!
 RUN FACTER_fqdn=dev FACTER_port=9000 FACTER_random=`< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c100` puppet apply init.pp
 
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
 EXPOSE 443
-
-ENTRYPOINT ["/usr/sbin/nginx"]
